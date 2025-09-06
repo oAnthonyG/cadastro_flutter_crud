@@ -1,4 +1,3 @@
-import 'package:cadastro_crud/models/user.dart';
 import 'package:cadastro_crud/provider/users.dart';
 import 'package:cadastro_crud/routes/app_routes.dart';
 import 'package:cadastro_crud/views/user_form.dart';
