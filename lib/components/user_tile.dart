@@ -1,6 +1,8 @@
 import 'package:cadastro_crud/models/user.dart';
+import 'package:cadastro_crud/provider/users.dart';
 import 'package:cadastro_crud/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserTile extends StatelessWidget {
   final User user;
@@ -11,7 +13,7 @@ class UserTile extends StatelessWidget {
     return ListTile(
       title: Text(user.name),
       subtitle: Text(user.email),
-      trailing: Container(
+      trailing: SizedBox(
         width: 100,
         child: Row(
           children: <Widget>[
@@ -27,7 +29,32 @@ class UserTile extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.delete),
               color: Colors.red,
-              onPressed: () {},
+              onPressed: () {
+                final usersProvider = Provider.of<UsersProvider>(context, listen: false);
+
+                showDialog(context: context, builder: (ctx) => AlertDialog(
+                  title: Text('Excluir Usuário'),
+                  content: Text('Tem certeza?'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('Não'),
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      },
+                    ),
+                    TextButton(
+                      child: Text('Sim'),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                    ),
+                  ],
+                )).then((confirmed) {
+                  if (confirmed != null && confirmed) {
+                    usersProvider.remove(user);
+                  }
+                });
+              },
             ),
           ],
         ),
