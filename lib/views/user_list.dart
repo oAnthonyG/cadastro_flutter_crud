@@ -13,7 +13,10 @@ class UserList extends StatelessWidget {
   
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista de Usuários'),
+        title: Text(
+          'Lista de Usuários',
+          style: TextStyle(color: Colors.white),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add, color: Colors.white),

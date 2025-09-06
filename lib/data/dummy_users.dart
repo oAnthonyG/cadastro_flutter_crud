@@ -6,20 +6,20 @@ final dummyUsers = {
     name: 'John Doe',
     email: 'johndoe@gmail.com',
     telefone: '123456789',
-    cidade: 'New York',
+    cidade: 'Gramado - RS',
   ),
   '2': User(
     id: '2',
     name: 'billy doe',
     email: 'billydoe@hotmail.com',
     telefone: '123456789',
-    cidade: 'LAS',
+    cidade: 'Barão de Grajaú - MA',
   ),
   '3': User(
     id: '3',
     name: 'Rogeirinho',
     email: 'saopaulino@gmail.com',
     telefone: '123456789',
-    cidade: 'New York',
+    cidade: 'Taubaté - SP',
   ),
 };

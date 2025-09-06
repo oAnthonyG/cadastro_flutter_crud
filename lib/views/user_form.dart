@@ -1,5 +1,6 @@
 import 'package:cadastro_crud/models/user.dart';
 import 'package:cadastro_crud/provider/users.dart';
+import 'package:cadastro_crud/utils/cidade_autocomplete.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,9 +23,18 @@ class UseForm extends StatelessWidget {
       _loadFormData(user);
     }
 
+    bool isValidPhoneNumber(String phone) {
+      final RegExp phoneExp = RegExp(r'^\(?\d{2}\)?[\s-]?\d{4,5}-?\d{4}$');
+      return phoneExp.hasMatch(phone);
+    }
+    bool isValidEmail(String email) {
+  final regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  return regex.hasMatch(email);
+}
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Formulário de Usuário'),
+        title: Text('Formulário de Usuário', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(
@@ -58,6 +68,7 @@ class UseForm extends StatelessWidget {
             children: <Widget>[
               TextFormField(
                 initialValue: _formData['name'],
+                keyboardType: TextInputType.name,
                 decoration: InputDecoration(labelText: 'Nome'),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -72,13 +83,14 @@ class UseForm extends StatelessWidget {
               ),
               TextFormField(
                 initialValue: _formData['email'],
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Nome inválido';
+                    return 'Digite um email válido';
                   }
-                  if (value.trim().length < 3) {
-                    return 'Nome muito curto. Mínimo 3 letras';
+                  if (!isValidEmail(value)) {
+                    return 'Email inválido';
                   }
                   return null;
                 },
@@ -86,32 +98,24 @@ class UseForm extends StatelessWidget {
               ),
               TextFormField(
                 initialValue: _formData['telefone'],
+                
+                keyboardType: TextInputType.phone,
                 decoration: InputDecoration(labelText: 'Telefone'),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Telefone inválido';
                   }
-                  if (value.trim().length < 3) {
-                    return 'Telefone muito curto. Mínimo 3 letras';
+                  if (!isValidPhoneNumber(value)) {
+                    return 'Número de telefone inválido';
                   }
                   return null;
                 },
                 onSaved: (value) => _formData['telefone'] = value!,
               ),
-              TextFormField(
+              CidadeAutocomplete(
                 initialValue: _formData['cidade'],
-                decoration: InputDecoration(labelText: 'Cidade'),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'cidade inválido';
-                  }
-                  if (value.trim().length < 3) {
-                    return 'Cidade muito curto. Mínimo 3 letras';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _formData['cidade'] = value!,
-              ),
+                onSaved: (cidade) => _formData['cidade'] = cidade,
+              )
             ],
           ),
         ),
