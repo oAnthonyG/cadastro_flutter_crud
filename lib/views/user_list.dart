@@ -5,21 +5,20 @@ import 'package:cadastro_crud/components/user_tile.dart';
 import 'package:provider/provider.dart';
 
 class UserList extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     final UsersProvider users = Provider.of(context);
-
+    final userList = users.all;
+  
     return Scaffold(
       appBar: AppBar(
-        
         title: Text('Lista de Usuários'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add, color: Colors.white),
             onPressed: () {
-              Navigator.of(
-                context,
-              ).pushNamed(AppRoutes.USER_FORM);
+              Navigator.of(context).pushNamed(AppRoutes.USER_FORM);
             },
           ),
         ],
@@ -27,7 +26,10 @@ class UserList extends StatelessWidget {
       ),
       body: ListView.builder(
         itemCount: users.count,
-        itemBuilder: (ctx, i) => UserTile(users.byIndex(i)),
+        itemBuilder: (ctx, i) {
+          final user = userList[i];
+          return UserTile(user, key: ValueKey(user.id));
+        },
       ),
     );
   }
