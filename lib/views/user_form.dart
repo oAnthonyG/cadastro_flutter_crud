@@ -104,7 +104,7 @@ class UseForm extends StatelessWidget {
                 initialValue: _formData['telefone'],
 
                 keyboardType: TextInputType.phone,
-                maxLength: 10,
+                maxLength: 11,
                 decoration: InputDecoration(labelText: 'Telefone'),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {

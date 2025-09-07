@@ -19,6 +19,14 @@ A principal motivação para o desenvolvimento foi aprimorar meus conhecimentos 
 
 <br>
 
+## 🎬 Demonstração
+
+Este projeto foi implantado usando Flutter e está disponível para interação ao vivo. Clique no botão abaixo para acessar a aplicação:
+
+[![Ver Demo Ao Vivo](https://img.shields.io/badge/Ver%20Demo%20Ao%20Vivo-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://lista-de-clientes-flutter-crud.netlify.app)
+
+Você pode testar todas as funcionalidades de CRUD (Criar, Ler, Atualizar e Deletar Clientes) diretamente no seu navegador.
+
 ## ✨ Funcionalidades
 
 - [x] **Criar Novo Cliente:** Adicionar um novo cliente com nome, e-mail, telefone e cidade.
