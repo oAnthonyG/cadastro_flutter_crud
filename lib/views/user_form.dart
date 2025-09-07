@@ -1,6 +1,6 @@
 import 'package:cadastro_crud/models/user.dart';
 import 'package:cadastro_crud/provider/users.dart';
-import 'package:cadastro_crud/utils/cidade_autocomplete.dart';
+import 'package:cadastro_crud/utils/city_validate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,14 +27,18 @@ class UseForm extends StatelessWidget {
       final RegExp phoneExp = RegExp(r'^\(?\d{2}\)?[\s-]?\d{4,5}-?\d{4}$');
       return phoneExp.hasMatch(phone);
     }
+
     bool isValidEmail(String email) {
-  final regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-  return regex.hasMatch(email);
-}
+      final regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+      return regex.hasMatch(email);
+    }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Formulário de Usuário', style: TextStyle(color: Colors.white)),
+        title: Text(
+          'Formulário de Usuário',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(
@@ -98,8 +102,9 @@ class UseForm extends StatelessWidget {
               ),
               TextFormField(
                 initialValue: _formData['telefone'],
-                
+
                 keyboardType: TextInputType.phone,
+                maxLength: 10,
                 decoration: InputDecoration(labelText: 'Telefone'),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -112,10 +117,10 @@ class UseForm extends StatelessWidget {
                 },
                 onSaved: (value) => _formData['telefone'] = value!,
               ),
-              CidadeAutocomplete(
+              AutocompleteCities(
                 initialValue: _formData['cidade'],
                 onSaved: (cidade) => _formData['cidade'] = cidade,
-              )
+              ),
             ],
           ),
         ),
