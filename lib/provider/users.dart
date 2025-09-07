@@ -1,11 +1,10 @@
 import 'dart:math';
 
-import 'package:cadastro_crud/data/dummy_users.dart';
 import 'package:cadastro_crud/models/user.dart';
 import 'package:flutter/material.dart';
 
 class UsersProvider with ChangeNotifier {
-  final Map<String, User> _items = {...dummyUsers};
+  final Map<String, User> _items = {};
 
   List<User> get all {
     return [..._items.values];
