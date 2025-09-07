@@ -36,7 +36,7 @@ class UseForm extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Formulário de Usuário',
+          'Formulário de Cliente',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.blue,

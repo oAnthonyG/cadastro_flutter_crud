@@ -14,7 +14,7 @@ class UserList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Lista de Usuários',
+          'Lista de Clietes',
           style: TextStyle(color: Colors.white),
         ),
         actions: <Widget>[
